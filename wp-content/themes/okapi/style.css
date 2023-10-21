@@ -1,0 +1,42 @@
+/*
+Theme Name: okapi
+Theme URI: 
+Author: Creative Bay
+Author URI: https://creative-bay.com
+Description: Okapi theme used for all marketing websites
+Requires at least: 6.0
+Tested up to: 6.3.2
+Requires PHP: 5.7
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: okapi
+*/
+
+
+/* HEADER */
+@media screen and (max-width: 1000px) {
+    .page-header .wp-block-navigation {
+        order: 1;
+    }
+    .page-header .wp-block-site-logo {
+        order: 2;
+        max-width: 220px;
+    }
+    .page-header .wp-block-buttons {
+        order: 3;
+    }
+    .page-header .wp-element-button span {
+        display: none;
+    }
+    .page-header .wp-block-navigation__responsive-container-open {
+        display: block;
+    }
+    .page-header .wp-block-navigation__responsive-container {
+        display: none!important;
+    }
+    .page-header .wp-block-navigation__responsive-container.is-menu-open {
+        display: block!important;
+
+    }
+}
