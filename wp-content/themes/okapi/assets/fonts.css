@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'okapi';
+    src:  url('fonts/okapi.eot?a4tliv');
+    src:  url('fonts/okapi.eot?a4tliv#iefix') format('embedded-opentype'),
+      url('fonts/okapi.ttf?a4tliv') format('truetype'),
+      url('fonts/okapi.woff?a4tliv') format('woff'),
+      url('fonts/okapi.svg?a4tliv#okapi') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="okapi-icon-"], [class*=" okapi-icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'okapi' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .okapi-icon-search:before {
+    content: "\e901";
+  }
+  .okapi-icon-monitor:before {
+    content: "\e902";
+  }
+  .okapi-icon-books:before {
+    content: "\e903";
+  }
+  .okapi-icon-notes:before {
+    content: "\e900";
+  }
+  .okapi-icon-download:before {
+    content: "\e904";
+  }
+  

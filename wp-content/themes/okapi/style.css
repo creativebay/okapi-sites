@@ -14,6 +14,15 @@ Text Domain: okapi
 */
 
 
+
+@import "assets/fonts.css";
+
+* {
+    transition-duration: 200ms;
+    transition-property: all;
+    transition-timing-function: ease;
+}
+
 /* HEADER */
 @media screen and (max-width: 1000px) {
     .page-header .wp-block-navigation {
@@ -37,6 +46,54 @@ Text Domain: okapi
     }
     .page-header .wp-block-navigation__responsive-container.is-menu-open {
         display: block!important;
-
     }
+}
+
+/* SIDEBAR */
+.wp-block-columns.page-with-sidebar .sidebar .wp-block-button,
+.wp-block-columns.page-with-sidebar .sidebar .wp-block-button__link {
+    width: 100%!important;
+}
+
+.wp-block-columns.page-with-sidebar {
+    display: flex;
+}
+
+.wp-block-columns.page-with-sidebar .main-content {
+    flex: 1;
+}
+
+.wp-block-columns.page-with-sidebar .sidebar {
+    flex: 18rem 0 0;
+}
+
+.wp-block-columns.page-with-sidebar .sidebar .wp-block-button__link.wp-element-button {
+    background-color: var(--wp--preset--color--light-blue);
+    color: var(--wp--preset--color--primary);
+    border: solid 1px #5FA1F7;
+}
+
+.wp-block-columns.page-with-sidebar .sidebar .wp-block-button__link.wp-element-button:hover {
+    background-color: var(--wp--preset--color--blue);
+    border-color: var(--wp--preset--color--blue);
+    color: var(--wp--preset--color--base);
+
+}
+
+/* NAVIGATION */
+.wp-block-navigation .wp-block-navigation-link.current-menu-item a {
+    color: var(--wp--preset--color--blue);
+}
+
+/* BUTTONS */
+.wp-block-button__link {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    padding: 1rem!important;
+}
+
+.entry-content {
+    min-height: 30rem;
 }
