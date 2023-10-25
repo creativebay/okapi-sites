@@ -49,6 +49,10 @@ Text Domain: okapi
     }
 }
 
+.page-header .wp-element-button.wp-block-button__link:hover {
+    background-color: var(--wp--preset--color--light-blue);
+}
+
 /* SIDEBAR */
 .wp-block-columns.page-with-sidebar .sidebar .wp-block-button,
 .wp-block-columns.page-with-sidebar .sidebar .wp-block-button__link {
