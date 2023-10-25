@@ -415,6 +415,11 @@
 				}
 			},
 			"h3": {
+				"spacing": {
+					"margin": {
+						"top": "3rem"
+					}
+				},
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--h-3)"
 				}
