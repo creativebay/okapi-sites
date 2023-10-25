@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5864b1543201859060f980ecd9cfbdcc
+class ComposerStaticInit37c7bba284025871d7134809613f51a9
 {
     public static $files = array (
         '16e4325dd9bdbbd2ce8c9530b088e50b' => __DIR__ . '/..' . '/codeinwp/themeisle-sdk/load.php',
@@ -203,6 +203,8 @@ class ComposerStaticInit5864b1543201859060f980ecd9cfbdcc
         'Stripe\\PaymentIntent' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentIntent.php',
         'Stripe\\PaymentLink' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentLink.php',
         'Stripe\\PaymentMethod' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentMethod.php',
+        'Stripe\\PaymentMethodConfiguration' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentMethodConfiguration.php',
+        'Stripe\\PaymentMethodDomain' => __DIR__ . '/..' . '/stripe/stripe-php/lib/PaymentMethodDomain.php',
         'Stripe\\Payout' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Payout.php',
         'Stripe\\Person' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Person.php',
         'Stripe\\Plan' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Plan.php',
@@ -266,6 +268,8 @@ class ComposerStaticInit5864b1543201859060f980ecd9cfbdcc
         'Stripe\\Service\\OAuthService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/OAuthService.php',
         'Stripe\\Service\\PaymentIntentService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PaymentIntentService.php',
         'Stripe\\Service\\PaymentLinkService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PaymentLinkService.php',
+        'Stripe\\Service\\PaymentMethodConfigurationService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PaymentMethodConfigurationService.php',
+        'Stripe\\Service\\PaymentMethodDomainService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PaymentMethodDomainService.php',
         'Stripe\\Service\\PaymentMethodService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PaymentMethodService.php',
         'Stripe\\Service\\PayoutService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PayoutService.php',
         'Stripe\\Service\\PlanService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/PlanService.php',
@@ -303,8 +307,10 @@ class ComposerStaticInit5864b1543201859060f980ecd9cfbdcc
         'Stripe\\Service\\Terminal\\ReaderService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/Terminal/ReaderService.php',
         'Stripe\\Service\\Terminal\\TerminalServiceFactory' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/Terminal/TerminalServiceFactory.php',
         'Stripe\\Service\\TestHelpers\\CustomerService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/CustomerService.php',
+        'Stripe\\Service\\TestHelpers\\Issuing\\AuthorizationService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Issuing/AuthorizationService.php',
         'Stripe\\Service\\TestHelpers\\Issuing\\CardService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Issuing/CardService.php',
         'Stripe\\Service\\TestHelpers\\Issuing\\IssuingServiceFactory' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Issuing/IssuingServiceFactory.php',
+        'Stripe\\Service\\TestHelpers\\Issuing\\TransactionService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Issuing/TransactionService.php',
         'Stripe\\Service\\TestHelpers\\RefundService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/RefundService.php',
         'Stripe\\Service\\TestHelpers\\Terminal\\ReaderService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Terminal/ReaderService.php',
         'Stripe\\Service\\TestHelpers\\Terminal\\TerminalServiceFactory' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/TestHelpers/Terminal/TerminalServiceFactory.php',
@@ -437,6 +443,7 @@ class ComposerStaticInit5864b1543201859060f980ecd9cfbdcc
         'ThemeIsle\\GutenbergBlocks\\Plugins\\Block_Conditions' => __DIR__ . '/../..' . '/inc/plugins/class-block-conditions.php',
         'ThemeIsle\\GutenbergBlocks\\Plugins\\Dashboard' => __DIR__ . '/../..' . '/inc/plugins/class-dashboard.php',
         'ThemeIsle\\GutenbergBlocks\\Plugins\\Dynamic_Content' => __DIR__ . '/../..' . '/inc/plugins/class-dynamic-content.php',
+        'ThemeIsle\\GutenbergBlocks\\Plugins\\LimitedOffers' => __DIR__ . '/../..' . '/inc/plugins/class-limited-offers.php',
         'ThemeIsle\\GutenbergBlocks\\Plugins\\Options_Settings' => __DIR__ . '/../..' . '/inc/plugins/class-options-settings.php',
         'ThemeIsle\\GutenbergBlocks\\Plugins\\Stripe_API' => __DIR__ . '/../..' . '/inc/plugins/class-stripe-api.php',
         'ThemeIsle\\GutenbergBlocks\\Pro' => __DIR__ . '/../..' . '/inc/class-pro.php',
@@ -469,9 +476,9 @@ class ComposerStaticInit5864b1543201859060f980ecd9cfbdcc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5864b1543201859060f980ecd9cfbdcc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5864b1543201859060f980ecd9cfbdcc::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5864b1543201859060f980ecd9cfbdcc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit37c7bba284025871d7134809613f51a9::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit37c7bba284025871d7134809613f51a9::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit37c7bba284025871d7134809613f51a9::$classMap;
 
         }, null, ClassLoader::class);
     }

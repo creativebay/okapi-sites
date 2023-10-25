@@ -3,13 +3,13 @@
   "apiVersion": 3,
   "name": "create-block/test-block",
   "version": "0.1.0",
-  "title": "Test Block",
+  "title": "Newsletter form",
   "category": "widgets",
-  "icon": "smiley",
+  "icon": "write-blog",
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
-    "html": false
+    "html": true
   },
   "textdomain": "test-block",
   "editorScript": "file:./index.js",

@@ -32,12 +32,10 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<div { ...useBlockProps() }>
-			<div className="main-content">
-				<InnerBlocks />
-			</div>
-			<div className="sidebar">
-				<InnerBlocks />
-			</div>
+			<form class="newsletter-form" target="_blank" action="https://myokapi.com/newsletter-form" method="GET">
+				<input name="email" placeholder="Enter your email" />
+				<button type="submit">Join us</button>
+			</form>
 		</div>
 
 	);
