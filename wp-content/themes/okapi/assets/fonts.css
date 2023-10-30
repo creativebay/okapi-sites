@@ -10,7 +10,7 @@
     font-display: block;
   }
   
-  [class^="okapi-icon-"], [class*=" okapi-icon-"] {
+  [class^="okapi-icon-"]:before, [class*=" okapi-icon-"]:before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'okapi' !important;
     speak: never;

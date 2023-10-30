@@ -59,6 +59,25 @@ Text Domain: okapi
     width: 100%!important;
 }
 
+.wp-block-button.okapi-icon {
+    position: relative;
+}
+
+.wp-block-button.okapi-icon .wp-block-button__link {
+    padding-left: 3rem!important;
+}
+
+.wp-block-button.okapi-icon:hover::before {
+    color: white;
+}
+
+.wp-block-button.okapi-icon:before {
+    position: absolute;
+    font-size: 1.4rem;
+    left: 1rem;
+    top: 0.875rem;
+}
+
 .wp-block-columns.page-with-sidebar {
     display: flex;
 }
