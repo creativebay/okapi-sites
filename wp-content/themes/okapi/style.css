@@ -154,7 +154,7 @@ Text Domain: okapi
     color: var(--wp--preset--color--blue);
 }
 
-.aioseo-breadcrumbs-separator {
+.aioseo-breadcrumb-separator {
     margin: 0 0.5rem;
     font-weight: 300;
     font-size: 1.4rem;
