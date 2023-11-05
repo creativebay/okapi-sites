@@ -48,6 +48,12 @@
 					"color": "#555F6D",
 					"name": "Grey",
 					"slug": "grey"
+				},
+
+				{
+					"color": "#E9ECEF",
+					"name": "Light grey",
+					"slug": "light-grey"
 				}
 			],
 			"text": true

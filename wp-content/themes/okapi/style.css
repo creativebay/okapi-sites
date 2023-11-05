@@ -120,3 +120,26 @@ Text Domain: okapi
 .entry-content {
     min-height: 30rem;
 }
+
+/* CONTENT BOX */
+.content-box {
+    border: solid 1px var(--wp--preset--color--light-grey);
+    border-radius: 0.5rem;
+    padding: var(--wp--preset--spacing--30);
+}
+
+.content-box:hover {
+    box-shadow: 0px 8px 30px 0px rgba(27, 36, 44, 0.08), 0px 2px 4px 0px rgba(27, 35, 44, 0.02);
+    border-color: var(--wp--preset--color--blue);
+}
+
+.content-box .wp-block-column.description {
+    flex: 1;
+}
+
+.content-box .wp-block-column.call-to-action {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: max-content;
+    white-space: nowrap;
+}
