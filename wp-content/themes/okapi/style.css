@@ -100,7 +100,11 @@ Text Domain: okapi
     background-color: var(--wp--preset--color--blue);
     border-color: var(--wp--preset--color--blue);
     color: var(--wp--preset--color--base);
+}
 
+.wp-block-columns.page-with-sidebar h5 {
+    padding: 1rem 0 1rem 4rem;
+    background: url(assets/images/topics.svg) no-repeat left center;
 }
 
 /* NAVIGATION */
