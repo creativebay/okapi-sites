@@ -76,6 +76,7 @@ Text Domain: okapi
     font-size: 1.4rem;
     left: 1rem;
     top: 0.875rem;
+    pointer-events: none;
 }
 
 .wp-block-columns.page-with-sidebar {
