@@ -45,11 +45,15 @@
 					"slug": "light-orange"
 				},
 				{
+					"color": "#FFF9EE",
+					"name": "Yellow",
+					"slug": "yellow"
+				},
+				{
 					"color": "#555F6D",
 					"name": "Grey",
 					"slug": "grey"
 				},
-
 				{
 					"color": "#E9ECEF",
 					"name": "Light grey",
