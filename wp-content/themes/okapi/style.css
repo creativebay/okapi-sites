@@ -57,6 +57,7 @@ Text Domain: okapi
 .wp-block-columns.page-with-sidebar .sidebar .wp-block-button,
 .wp-block-columns.page-with-sidebar .sidebar .wp-block-button__link {
     width: 100%!important;
+    height: 3.75rem;
 }
 
 .wp-block-button.okapi-icon {
@@ -75,7 +76,7 @@ Text Domain: okapi
     position: absolute;
     font-size: 1.4rem;
     left: 1rem;
-    top: 0.875rem;
+    top: 1.2rem;
     pointer-events: none;
 }
 
