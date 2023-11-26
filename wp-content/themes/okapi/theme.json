@@ -58,6 +58,16 @@
 					"color": "#E9ECEF",
 					"name": "Light grey",
 					"slug": "light-grey"
+				},
+				{
+					"color": "#C2EBD5",
+					"name": "Green",
+					"slug": "green"
+				},
+				{
+					"color": "#E6F9EF",
+					"name": "Light green",
+					"slug": "light-green"
 				}
 			],
 			"text": true
