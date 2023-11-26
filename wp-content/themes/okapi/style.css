@@ -76,12 +76,13 @@ Text Domain: okapi
     position: absolute;
     font-size: 1.4rem;
     left: 1rem;
-    top: 1.2rem;
+    top: 1.15rem;
     pointer-events: none;
 }
 
 .wp-block-columns.page-with-sidebar {
     display: flex;
+    gap: 3rem;
 }
 
 .wp-block-columns.page-with-sidebar .main-content {
