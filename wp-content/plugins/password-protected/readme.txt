@@ -2,9 +2,9 @@
 Contributors: wpexpertsio
 Tags: password, maintenance mode, coming soon page, password protect, login
 Requires at least: 4.6
-Tested up to: 6.3.2
+Tested up to: 6.4.1
 Requires PHP: 5.6
-Stable tag: 2.6.5
+Stable tag: 2.6.5.1
 License: GPLv2 or later
 
 The ultimate password protection plugin that protects your WordPress site with a single password.
@@ -138,6 +138,9 @@ If you would like to translate this plugin you can easily contribute at the [Tra
 4. Password Protected advanced settings page.
 
 == Changelog ==
+= 2.6.5.1 =
+- Ensured seamless compatibility with the latest WordPress version
+
 = 2.6.5 =
 - Fixed - [Login Designer](https://wp.org/plugins/login-designer) compatibility issues.
 
