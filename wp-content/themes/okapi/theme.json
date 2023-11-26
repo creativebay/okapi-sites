@@ -68,6 +68,16 @@
 					"color": "#E6F9EF",
 					"name": "Light green",
 					"slug": "light-green"
+				},
+				{
+					"color": "#F8E3FD",
+					"name": "Purple",
+					"slug": "purple"
+				},
+				{
+					"color": "#FEFAFF",
+					"name": "Light purple",
+					"slug": "light-purple"
 				}
 			],
 			"text": true
