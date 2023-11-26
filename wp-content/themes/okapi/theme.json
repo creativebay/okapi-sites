@@ -60,6 +60,11 @@
 					"slug": "light-grey"
 				},
 				{
+					"color": "#ED1C24",
+					"name": "Red",
+					"slug": "red"
+				},
+				{
 					"color": "#C2EBD5",
 					"name": "Green",
 					"slug": "green"

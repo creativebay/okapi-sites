@@ -49,6 +49,12 @@ Text Domain: okapi
     }
 }
 
+.page-header .wp-element-button.wp-block-button__link span:before {
+    font-family: 'okapi';
+    content: "\e907";
+    margin-right: 0.5rem;
+}
+
 .page-header .wp-element-button.wp-block-button__link:hover {
     background-color: var(--wp--preset--color--light-blue);
 }
@@ -166,4 +172,25 @@ Text Domain: okapi
     margin: 0 0.5rem;
     font-weight: 300;
     font-size: 1.4rem;
+}
+
+/* DECORATED LISTS */
+ul.decorated {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.decorated li {
+    display: flex;
+}
+
+ul.decorated li:before {
+    font-family: 'okapi';
+    content: "\e905";
+    margin-right: 0.5rem;
+    color: var(--wp--preset--color--red);
+}
+
+ul.decorated li a:hover {
+    color: var(--wp--preset--color--red);
 }
