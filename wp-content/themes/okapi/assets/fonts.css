@@ -24,7 +24,31 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  .okapi-icon-tick-oval:before {
+    content: "\e905";
+  }
+  .okapi-icon-arrow-down:before {
+    content: "\e906";
+  }
+  .okapi-icon-arrow-left:before {
+    content: "\e907";
+  }
+  .okapi-icon-arrow-right:before {
+    content: "\e908";
+  }
+  .okapi-icon-arrow-up:before {
+    content: "\e909";
+  }
+  .okapi-icon-home:before {
+    content: "\e90a";
+  }
+  .okapi-icon-book-star:before {
+    content: "\e90b";
+  }
+  .okapi-icon-book-bump:before {
+    content: "\e90c";
+  }
   .okapi-icon-search:before {
     content: "\e901";
   }
@@ -40,4 +64,3 @@
   .okapi-icon-download:before {
     content: "\e904";
   }
-  
