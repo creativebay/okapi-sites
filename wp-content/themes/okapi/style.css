@@ -188,6 +188,7 @@ ul.decorated li:before {
     font-family: 'okapi';
     content: "\e905";
     margin-right: 0.5rem;
+    margin-top: -1px;
     color: var(--wp--preset--color--red);
 }
 
