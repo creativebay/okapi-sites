@@ -117,6 +117,12 @@ Text Domain: okapi
     background: url(assets/images/topics.svg) no-repeat left center;
 }
 
+@media screen and (max-width: 781px) {
+    .wp-block-columns.page-with-sidebar {
+        flex-direction: column-reverse;
+    }
+}
+
 /* NAVIGATION */
 .wp-block-navigation .wp-block-navigation-link.current-menu-item a {
     color: var(--wp--preset--color--blue);
@@ -222,4 +228,11 @@ ul.decorated li:before {
 
 ul.decorated li a:hover {
     color: var(--wp--preset--color--red);
+}
+
+/* PAGES */
+@media screen and (max-width: 781px) {
+    .wp-block-columns-is-layout-flex.reverse {
+        flex-direction: column-reverse;
+    }
 }
