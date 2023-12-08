@@ -128,6 +128,12 @@ Text Domain: okapi
     color: var(--wp--preset--color--blue);
 }
 
+
+.wp-block-navigation .wp-block-navigation__responsive-container .wp-block-navigation__responsive-close {
+    padding: 2rem;
+}
+
+
 /* BUTTONS */
 .wp-block-button__link {
     text-align: left;
