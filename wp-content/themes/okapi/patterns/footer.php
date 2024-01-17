@@ -72,7 +72,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:paragraph {"align":"right"} -->
-<p class="has-text-align-right">© 2023 <a href="https://myokapi.com" target="_blank" rel="noreferrer noopener">Okapi</a>. All Rights Reserved.</p>
+<p class="has-text-align-right">© <?php echo date("Y");?> <a href="https://myokapi.com" target="_blank" rel="noreferrer noopener">Okapi</a>. All Rights Reserved.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
