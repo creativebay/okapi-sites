@@ -73,6 +73,17 @@ class Post extends Model {
 	];
 
 	/**
+	 * Fields that can be null when saved.
+	 *
+	 * @since 4.5.7
+	 *
+	 * @var array
+	 */
+	protected $nullFields = [
+		'priority'
+	];
+
+	/**
 	 * Returns a Post with a given ID.
 	 *
 	 * @since 4.0.0
@@ -393,7 +404,7 @@ class Post extends Model {
 	 * @param  array $data    The data.
 	 * @return Post           The Post object with data set.
 	 */
-	private static function sanitizeAndSetDefaults( $postId, $thePost, $data ) {
+	protected static function sanitizeAndSetDefaults( $postId, $thePost, $data ) {
 		// General
 		$thePost->post_id                     = $postId;
 		$thePost->title                       = ! empty( $data['title'] ) ? sanitize_text_field( $data['title'] ) : null;
@@ -418,7 +429,7 @@ class Post extends Model {
 		$thePost->robots_nosnippet            = isset( $data['nosnippet'] ) ? rest_sanitize_boolean( $data['nosnippet'] ) : 0;
 		$thePost->robots_noodp                = isset( $data['noodp'] ) ? rest_sanitize_boolean( $data['noodp'] ) : 0;
 		$thePost->robots_max_snippet          = ! empty( $data['maxSnippet'] ) ? (int) sanitize_text_field( $data['maxSnippet'] ) : -1;
-		$thePost->robots_max_videopreview     = ! empty( $data['maxVideoPreview'] ) ? (int) sanitize_text_field( $data['maxVideoPreview'] ) : -1;
+		$thePost->robots_max_videopreview     = isset( $data['maxVideoPreview'] ) && is_numeric( $data['maxVideoPreview'] ) ? (int) sanitize_text_field( $data['maxVideoPreview'] ) : -1;
 		$thePost->robots_max_imagepreview     = ! empty( $data['maxImagePreview'] ) ? sanitize_text_field( $data['maxImagePreview'] ) : 'large';
 		// Open Graph Meta
 		$thePost->og_title                    = ! empty( $data['og_title'] ) ? sanitize_text_field( $data['og_title'] ) : null;
@@ -462,6 +473,13 @@ class Post extends Model {
 
 		if ( ! $thePost->exists() ) {
 			$thePost->created = gmdate( 'Y-m-d H:i:s' );
+		}
+
+		// Update defaults from addons.
+		foreach ( aioseo()->addons->getLoadedAddons() as $addon ) {
+			if ( isset( $addon->postModel ) && method_exists( $addon->postModel, 'sanitizeAndSetDefaults' ) ) {
+				$thePost = $addon->postModel->sanitizeAndSetDefaults( $postId, $thePost, $data );
+			}
 		}
 
 		return $thePost;
@@ -722,7 +740,7 @@ class Post extends Model {
 	 * @since 4.3.2
 	 *
 	 * @param  array $existingOptions The existing options.
-	 * @return array                  The default options.
+	 * @return object                 The default options.
 	 */
 	public static function getDefaultOpenAiOptions( $existingOptions = [] ) {
 		$defaults = [
