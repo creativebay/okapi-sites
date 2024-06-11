@@ -24,6 +24,12 @@ Text Domain: okapi
 }
 
 /* HEADER */
+@media screen and (min-width: 1001px) {
+    .standalone .wp-block-navigation .wp-block-navigation__responsive-container .wp-block-navigation__responsive-close {
+        padding: 2rem 0;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .page-header .wp-block-navigation {
         order: 1;
@@ -31,6 +37,10 @@ Text Domain: okapi
     .page-header .wp-block-site-logo {
         order: 2;
         max-width: 220px;
+    }
+    .standalone .page-header .wp-block-site-logo {
+        margin-right: auto;
+        margin-left: 2rem;
     }
     .page-header .wp-block-buttons {
         order: 3;
