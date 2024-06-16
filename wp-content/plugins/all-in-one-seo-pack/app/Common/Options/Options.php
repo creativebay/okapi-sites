@@ -181,7 +181,8 @@ TEMPLATE
 					'soundCloudUrl'   => [ 'type' => 'string' ],
 					'wikipediaUrl'    => [ 'type' => 'string' ],
 					'myspaceUrl'      => [ 'type' => 'string' ],
-					'googlePlacesUrl' => [ 'type' => 'string' ]
+					'googlePlacesUrl' => [ 'type' => 'string' ],
+					'wordPressUrl'    => [ 'type' => 'string' ],
 				],
 				'additionalUrls' => [ 'type' => 'string' ]
 			],
@@ -241,17 +242,24 @@ TEMPLATE
 				'metaDescription' => [ 'type' => 'string', 'localized' => true, 'default' => '#tagline' ],
 				'keywords'        => [ 'type' => 'string', 'localized' => true ],
 				'schema'          => [
-					'websiteName'          => [ 'type' => 'string' ],
-					'websiteAlternateName' => [ 'type' => 'string' ],
-					'siteRepresents'       => [ 'type' => 'string', 'default' => 'organization' ],
-					'person'               => [ 'type' => 'string' ],
-					'organizationName'     => [ 'type' => 'string' ],
-					'organizationLogo'     => [ 'type' => 'string' ],
-					'personName'           => [ 'type' => 'string' ],
-					'personLogo'           => [ 'type' => 'string' ],
-					'phone'                => [ 'type' => 'string' ],
-					'contactType'          => [ 'type' => 'string' ],
-					'contactTypeManual'    => [ 'type' => 'string' ]
+					'websiteName'             => [ 'type' => 'string', 'default' => '#site_title' ],
+					'websiteAlternateName'    => [ 'type' => 'string' ],
+					'siteRepresents'          => [ 'type' => 'string', 'default' => 'organization' ],
+					'person'                  => [ 'type' => 'string' ],
+					'organizationName'        => [ 'type' => 'string', 'default' => '#site_title' ],
+					'organizationDescription' => [ 'type' => 'string', 'default' => '#tagline' ],
+					'organizationLogo'        => [ 'type' => 'string' ],
+					'personName'              => [ 'type' => 'string' ],
+					'personLogo'              => [ 'type' => 'string' ],
+					'phone'                   => [ 'type' => 'string' ],
+					'email'                   => [ 'type' => 'string' ],
+					'foundingDate'            => [ 'type' => 'string' ],
+					'numberOfEmployees'       => [
+						'isRange' => [ 'type' => 'boolean' ],
+						'from'    => [ 'type' => 'number' ],
+						'to'      => [ 'type' => 'number' ],
+						'number'  => [ 'type' => 'number' ]
+					]
 				]
 			],
 			'advanced' => [
@@ -517,12 +525,9 @@ TEMPLATE
 
 		$hasInitialized = true;
 
-		$this->defaults['searchAppearance']['global']['schema']['organizationName']['default'] = aioseo()->helpers->decodeHtmlEntities( get_bloginfo( 'name' ) );
 		$this->defaults['deprecated']['tools']['blocker']['custom']['bots']['default']         = implode( "\n", aioseo()->badBotBlocker->getBotList() );
 		$this->defaults['deprecated']['tools']['blocker']['custom']['referer']['default']      = implode( "\n", aioseo()->badBotBlocker->getRefererList() );
 
-		$this->defaults['searchAppearance']['global']['schema']['organizationName']['default'] = aioseo()->helpers->decodeHtmlEntities( get_bloginfo( 'name' ) );
-		$this->defaults['searchAppearance']['global']['schema']['websiteName']['default']      = aioseo()->helpers->decodeHtmlEntities( get_bloginfo( 'name' ) );
 		$this->defaults['searchAppearance']['global']['schema']['organizationLogo']['default'] = aioseo()->helpers->getSiteLogoUrl() ? aioseo()->helpers->getSiteLogoUrl() : '';
 	}
 
@@ -564,14 +569,16 @@ TEMPLATE
 	 * @return void
 	 */
 	public function sanitizeAndSave( $options ) {
-		$sitemapOptions           = ! empty( $options['sitemap']['general'] ) ? $options['sitemap']['general'] : null;
-		$oldSitemapOptions        = aioseo()->options->sitemap->general->all();
-		$deprecatedSitemapOptions = ! empty( $options['deprecated']['sitemap']['general'] )
+		$sitemapOptions                  = ! empty( $options['sitemap'] ) ? $options['sitemap'] : null;
+		$oldSitemapOptions               = aioseo()->options->sitemap->all();
+		$generalSitemapOptions           = ! empty( $options['sitemap']['general'] ) ? $options['sitemap']['general'] : null;
+		$oldGeneralSitemapOptions        = aioseo()->options->sitemap->general->all();
+		$deprecatedGeneralSitemapOptions = ! empty( $options['deprecated']['sitemap']['general'] )
 				? $options['deprecated']['sitemap']['general']
 				: null;
-		$oldDeprecatedSitemapOptions = aioseo()->options->deprecated->sitemap->general->all();
-		$oldPhoneOption              = aioseo()->options->searchAppearance->global->schema->phone;
-		$phoneNumberOptions          = isset( $options['searchAppearance']['global']['schema']['phone'] )
+		$oldDeprecatedGeneralSitemapOptions = aioseo()->options->deprecated->sitemap->general->all();
+		$oldPhoneOption                     = aioseo()->options->searchAppearance->global->schema->phone;
+		$phoneNumberOptions                 = isset( $options['searchAppearance']['global']['schema']['phone'] )
 				? $options['searchAppearance']['global']['schema']['phone']
 				: null;
 		$oldHtmlSitemapUrl = aioseo()->options->sitemap->html->pageUrl;
@@ -644,16 +651,16 @@ TEMPLATE
 
 		// If sitemap settings were changed, static files need to be regenerated.
 		if (
-			! empty( $deprecatedSitemapOptions ) &&
-			! empty( $sitemapOptions )
+			! empty( $deprecatedGeneralSitemapOptions ) &&
+			! empty( $generalSitemapOptions )
 		) {
 			if (
 				(
-					aioseo()->helpers->arraysDifferent( $oldSitemapOptions, $sitemapOptions ) ||
-					aioseo()->helpers->arraysDifferent( $oldDeprecatedSitemapOptions, $deprecatedSitemapOptions )
+					aioseo()->helpers->arraysDifferent( $oldGeneralSitemapOptions, $generalSitemapOptions ) ||
+					aioseo()->helpers->arraysDifferent( $oldDeprecatedGeneralSitemapOptions, $deprecatedGeneralSitemapOptions )
 				) &&
-				$sitemapOptions['advancedSettings']['enable'] &&
-				! $deprecatedSitemapOptions['advancedSettings']['dynamic']
+				$generalSitemapOptions['advancedSettings']['enable'] &&
+				! $deprecatedGeneralSitemapOptions['advancedSettings']['dynamic']
 			) {
 				aioseo()->sitemap->scheduleRegeneration();
 			}
@@ -662,6 +669,10 @@ TEMPLATE
 		// Add or remove schedule for clearing crawl cleanup logs.
 		if ( ! empty( $logsRetention ) && $oldLogsRetention !== $logsRetention ) {
 			aioseo()->crawlCleanup->scheduleClearingLogs();
+		}
+
+		if ( ! empty( $sitemapOptions ) ) {
+			aioseo()->searchStatistics->sitemap->maybeSync( $oldSitemapOptions, $sitemapOptions );
 		}
 
 		// This is required in order for the Pro options to be refreshed before they save data again.

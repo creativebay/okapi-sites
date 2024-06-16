@@ -649,6 +649,7 @@ class GeneralSettings {
 			'soundcloud.com' => 'soundCloudUrl',
 			'wikipedia.org'  => 'wikipediaUrl',
 			'myspace.com'    => 'myspaceUrl',
+			'wordpress.org'  => 'wordpressUrl',
 		];
 
 		$found = false;
@@ -693,11 +694,6 @@ class GeneralSettings {
 			} else {
 				aioseo()->options->searchAppearance->global->schema->person = intval( $this->oldOptions['aiosp_schema_person_user'] );
 			}
-		}
-
-		if ( ! empty( $this->oldOptions['aiosp_schema_contact_type'] ) ) {
-			aioseo()->options->searchAppearance->global->schema->contactType       = 'manual';
-			aioseo()->options->searchAppearance->global->schema->contactTypeManual = aioseo()->helpers->sanitizeOption( $this->oldOptions['aiosp_schema_contact_type'] );
 		}
 	}
 
