@@ -252,3 +252,8 @@ ul.decorated li a:hover {
         flex-direction: column-reverse;
     }
 }
+
+.flipbook {
+    height: 80vh;
+    border: 0;
+}
