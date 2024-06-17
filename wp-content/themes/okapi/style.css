@@ -257,3 +257,12 @@ ul.decorated li a:hover {
     height: 80vh;
     border: 0;
 }
+
+.request-samples:hover {
+    cursor: pointer;
+    background-color: var(--wp--preset--color--dark-blue);
+}
+
+.request-samples a:hover {
+    text-decoration: none;
+}
