@@ -260,7 +260,7 @@ ul.decorated li a:hover {
 
 .request-samples:hover {
     cursor: pointer;
-    background-color: var(--wp--preset--color--dark-blue);
+    background-color: var(--wp--preset--color--dark-blue)!important;
 }
 
 .request-samples a:hover {
