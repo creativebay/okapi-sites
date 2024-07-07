@@ -153,6 +153,27 @@ Text Domain: okapi
     padding: 1rem!important;
 }
 
+.button-secondary .wp-element-button {
+    background-color: white;
+    border-color: #cfd6dd;
+    color: var(--wp--preset--color--primary);
+}
+
+@media screen and (max-width: 781px) {
+    .page-header .button-secondary .wp-element-button {
+        text-indent: -9999;
+    }
+    
+    .page-header .button-secondary .wp-element-button:after {
+        content: 'myokapi';
+        text-indent: 0;
+    }
+}
+
+.button-secondary .wp-element-button:hover {
+    background-color: var(--wp--preset--color--primary);
+}
+
 .entry-content {
     min-height: 30rem;
 }
