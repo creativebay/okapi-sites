@@ -288,3 +288,36 @@ ul.decorated li a:hover {
 .request-samples a:hover {
     text-decoration: none;
 }
+
+.newsletter-form {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+
+    input {
+        margin-right: 0.5rem;
+        border: solid 1px #CFD6DD;
+        max-width: 20rem;
+        width: 100%;
+    }
+
+    button {
+        background-color: var(--wp--preset--color--blue);
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    input, button {
+        height: 2.5rem;
+        box-sizing: border-box;
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    ::placeholder {
+        color: #7E8B99;
+    }
+}
