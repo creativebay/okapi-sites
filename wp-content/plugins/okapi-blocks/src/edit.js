@@ -11,7 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { TextControl, PanelBody } from '@wordpress/components';
+
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,14 +31,41 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
-	return (
-		<div { ...useBlockProps() }>
-			<form class="newsletter-form" target="_blank" action="https://myokapi.com/newsletter-form" method="GET">
-				<input name="email" placeholder="Enter your email" />
-				<button type="submit">Join us</button>
-			</form>
-		</div>
+export default function Edit({ attributes, setAttributes }) {
+	const { placeholder, submitButtonLabel } = attributes;
 
+	return (
+		<>
+			<InspectorControls>
+				<PanelBody title={ __( 'Settings', 'test-block' ) }>
+					<TextControl
+                        label={ __(
+                            'Placeholder',
+                            'test-block'
+                        ) }
+                        value={ placeholder || 'Enter your email' }
+                        onChange={ ( value ) =>
+                            setAttributes( { placeholder: value } )
+                        }
+                    />
+					<TextControl
+                        label={ __(
+                            'Submit button label',
+                            'test-block'
+                        ) }
+                        value={ submitButtonLabel || 'Join us' }
+                        onChange={ ( value ) =>
+                            setAttributes( { submitButtonLabel: value } )
+                        }
+                    />
+				</PanelBody>
+			</InspectorControls>
+			<div { ...useBlockProps() }>
+				<form class="newsletter-form" target="_blank" action="https://myokapi.com/newsletter-form" method="get">
+					<input name="email" placeholder={placeholder} />
+					<button type="submit">{submitButtonLabel}</button>
+				</form>
+			</div>
+		</>
 	);
 }

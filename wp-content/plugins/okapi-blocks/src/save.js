@@ -15,12 +15,15 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+
+export default function save({ attributes }) {
+	const { placeholder = 'Enter your email', submitButtonLabel = 'Join us' } = attributes;
+
 	return (
 		<div { ...useBlockProps.save() }>
-			<form class="newsletter-form" target="_blank" action="https://myokapi.com/newsletter-form" method="GET">
-				<input name="email" placeholder="Enter your email" />
-				<button type="submit">Join us</button>
+			<form class="newsletter-form" target="_blank" action="https://myokapi.com/newsletter-form" method="get">
+				<input name="email" placeholder={placeholder} />
+				<button type="submit">{submitButtonLabel}</button>
 			</form>
 		</div>
 	);

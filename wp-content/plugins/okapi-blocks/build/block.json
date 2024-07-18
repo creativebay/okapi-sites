@@ -8,6 +8,14 @@
   "icon": "write-blog",
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
+  "attributes": {
+    "placeholder": {
+      "type": "string"
+    },
+    "submitButtonLabel": {
+      "type": "string"
+    }
+  },
   "supports": {
     "html": true
   },
