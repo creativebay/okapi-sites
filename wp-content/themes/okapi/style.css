@@ -333,13 +333,13 @@ ul.decorated li a:hover {
 
 
 .language-switcher .wp-element-button:hover {
-    background-color: var(--wp--preset--color--blue);
+    background-color: var(--wp--preset--color--blue)!important;
     border: solid 1px var(--wp--preset--color--blue);
     color: white;
 }
 
-.language-switcher .wp-block-button.active,
-.language-switcher .wp-block-button.active:hover {
+.language-switcher .wp-block-button.active .wp-element-button,
+.language-switcher  .wp-block-button.active .wp-element-button:hover {
     background-color: var(--wp--preset--color--blue);
     border: solid 1px var(--wp--preset--color--blue);
     color: white;
