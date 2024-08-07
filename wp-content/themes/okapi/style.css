@@ -321,3 +321,26 @@ ul.decorated li a:hover {
         color: #7E8B99;
     }
 }
+
+.language-switcher .wp-element-button {
+    padding: 0.25rem 0.5rem!important;
+    font-size: 11px;
+    border-radius: 20px;
+    background-color: white;
+    border: solid 1px #cfd6dd;
+    color: var(--wp--preset--color--primary);
+}
+
+
+.language-switcher .wp-element-button:hover {
+    background-color: var(--wp--preset--color--blue);
+    border: solid 1px var(--wp--preset--color--blue);
+    color: white;
+}
+
+.language-switcher .wp-block-button.active,
+.language-switcher .wp-block-button.active:hover {
+    background-color: var(--wp--preset--color--blue);
+    border: solid 1px var(--wp--preset--color--blue);
+    color: white;
+}
