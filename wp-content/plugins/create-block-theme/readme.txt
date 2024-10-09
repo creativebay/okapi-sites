@@ -1,9 +1,9 @@
 === Create Block Theme ===
 Contributors: wordpressdotorg, mikachan, onemaggie, pbking, scruffian, mmaattiiaass, jffng, madhudollu, egregor, vcanales, jeffikus, cwhitmore
 Tags: themes, theme, block-theme
-Requires at least: 6.5
-Tested up to: 6.5
-Stable tag: 2.2.0
+Requires at least: 6.6
+Tested up to: 6.6
+Stable tag: 2.5.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -29,7 +29,9 @@ This plugin also makes several changes to the contents of a theme, including:
 - Ensures the block markup used in templates and patterns is export-ready.
 - Ensures most strings used in templates and patterns are translate-ready.
 
-The plugin is development only — not intended for use on production websites, but used as a tool to create new themes.
+*Disclaimer:* The Create Block Theme plugin offers critical developer-friendly features; you can think of it as a Development Mode for WordPress, and you should *keep in mind that changes made through this plugin could change your site and/or theme permanently*.
+
+(Make sure you know what you're doing before hitting that 'Save' button 😉)
 
 = Step 1 – Setup =
 Install and activate the [Create Block Theme](https://wordpress.org/plugins/create-block-theme) plugin.
@@ -76,7 +78,7 @@ To create a variation:
 - Provide a name for the new Variation
 - Click "Create Theme Variation"
 
-To create a new Clone of the current theme or to create a Child of the current theme:ons for the currently active theme:
+To create a new Clone of the current theme or to create a Child of the current theme:
 
 - Click "Create Theme"
 - Click "Clone Theme" to create a new Theme based on the active theme with your changes
@@ -94,7 +96,7 @@ If you run into an issue, you should check the [Support forum](https://wordpress
 
 If you have a bug to report, please submit it to the [GitHub repository](https://github.com/WordPress/create-block-theme/issues) as an issue. Please search prior to creating a new bug to confirm its not a duplicate.
 
-== General Troobleshooting ==
+== General Troubleshooting ==
 
 If you are having problems, please try the following:
 
@@ -122,6 +124,47 @@ If you are having problems, please try the following:
 
 
 == Changelog ==
+
+= 2.5.0 =
+* Copy font assets to the local theme folder when creating a style variation (#713)
+* Adds minimum WordPress version to theme metadata (#715)
+* Add a main tag wrapper around the query loop (#726)
+* Remove "Categories: hidden" from default pattern header (#718)
+* Fix "troobleshooting" typo in readme.txt (#721)
+* Update node dependencies (#717)
+* Try: Add synced patterns to theme on save (#675)
+* Rename font assets when theme is saved and/or exported (#712)
+* Update escaping function (#683)
+* Redirect to proper editor_url (#708)
+* Update README.md disclaimer wording and formatting (#703)
+
+= 2.4.0 =
+* Bump minimum required WordPress version to 6.6 (#704)
+* Don't enable sidebar UI in classic theme (#705)
+* README markdown formatting (#702)
+* Update broken link in README (#701)
+* Update blank themes theme json version (#700)
+* Global Styles JSON data inspector (#697)
+* Delete only theme-related caches when saving changes (#685)
+* Update "Tested up to" version to 6.6 (#694)
+* Add theme reset section (#687)
+* Sanitize DOS (Windows) new line style on readme.txt (#681)
+
+= 2.3.0 =
+* Persist font settings when cloning a theme (#678)
+* Landing Page: Improve design (#673)
+* Fix small readme typo (#674)
+* A11y: Improve color contrast for help button (#672)
+* Quality: Fix warning error when exporting theme (#671)
+* Remove unused REST API endpoint (#670)
+* Refactor theme fonts class for readability (#661)
+* Check if theme fonts present before removing (#660)
+* Add an about section in the editor (#667)
+* Update escaping function (#665)
+* Make external links translatable (#663)
+* Update url for blueprint (#658)
+* Add image credits edit capabilities to the edit theme modal (#662)
+* Quality: Remove unused PHP classes (#664)
 
 = 2.2.0 =
 * Update modal width to 65vw (#638)

@@ -11,8 +11,6 @@ require_once __DIR__ . '/create-theme/theme-styles.php';
 require_once __DIR__ . '/create-theme/theme-json.php';
 require_once __DIR__ . '/create-theme/theme-utils.php';
 require_once __DIR__ . '/create-theme/theme-readme.php';
-require_once __DIR__ . '/create-theme/theme-form.php';
-require_once __DIR__ . '/create-theme/form-messages.php';
 require_once __DIR__ . '/create-theme/theme-fonts.php';
 require_once __DIR__ . '/create-theme/theme-create.php';
 
@@ -115,28 +113,6 @@ class CBT_Theme_API {
 		);
 		register_rest_route(
 			'create-block-theme/v1',
-			'/export-clone',
-			array(
-				'methods'             => 'POST',
-				'callback'            => array( $this, 'rest_export_cloned_theme' ),
-				'permission_callback' => function () {
-					return current_user_can( 'edit_theme_options' );
-				},
-			)
-		);
-		register_rest_route(
-			'create-block-theme/v1',
-			'/export-child-clone',
-			array(
-				'methods'             => 'POST',
-				'callback'            => array( $this, 'rest_export_child_cloned_theme' ),
-				'permission_callback' => function () {
-					return current_user_can( 'edit_theme_options' );
-				},
-			)
-		);
-		register_rest_route(
-			'create-block-theme/v1',
 			'/get-readme-data',
 			array(
 				'methods'             => 'GET',
@@ -163,6 +139,17 @@ class CBT_Theme_API {
 			array(
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'rest_get_font_families' ),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_theme_options' );
+				},
+			),
+		);
+		register_rest_route(
+			'create-block-theme/v1',
+			'/reset-theme',
+			array(
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'rest_reset_theme' ),
 				'permission_callback' => function () {
 					return current_user_can( 'edit_theme_options' );
 				},
@@ -252,8 +239,15 @@ class CBT_Theme_API {
 	}
 
 	function rest_create_variation( $request ) {
+		$options = $request->get_params();
 
-		$response = CBT_Theme_JSON::add_theme_json_variation_to_local( 'variation', $this->sanitize_theme_data( $request->get_params() ) );
+		$save_fonts = isset( $options['saveFonts'] ) && true === $options['saveFonts'];
+
+		$response = CBT_Theme_JSON::add_theme_json_variation_to_local(
+			'variation',
+			$this->sanitize_theme_data( $options ),
+			$save_fonts
+		);
 
 		wp_cache_flush();
 
@@ -289,118 +283,6 @@ class CBT_Theme_API {
 				'message' => __( 'Blank Theme Created.', 'create-block-theme' ),
 			)
 		);
-	}
-
-	function rest_export_cloned_theme( $request ) {
-
-		//TODO: Handle Screenshots
-		$screenshot = null;
-		$theme      = $this->sanitize_theme_data( $request->get_params() );
-
-		// Use previous theme's tags if custom tags are empty.
-		if ( empty( $theme['tags_custom'] ) ) {
-			$theme['tags_custom'] = implode( ', ', wp_get_theme()->get( 'Tags' ) );
-		}
-
-		// Create ZIP file in the temporary directory.
-		$filename = tempnam( get_temp_dir(), $theme['slug'] );
-		$zip      = CBT_Theme_Zip::create_zip( $filename, $theme['slug'] );
-		$zip      = CBT_Theme_Zip::copy_theme_to_zip( $zip, $theme['slug'], $theme['name'] );
-		$zip      = CBT_Theme_Zip::add_templates_to_zip( $zip, 'all', $theme['slug'] );
-
-		//TODO: Should the font persistent be optional?
-		// If so then the Font Library fonts will need to be removed from the theme.json settings.
-		$theme_json = CBT_Theme_JSON_Resolver::export_theme_data( 'all' );
-		$theme_json = CBT_Theme_Zip::add_activated_fonts_to_zip( $zip, $theme_json );
-		$zip        = CBT_Theme_Zip::add_theme_json_to_zip( $zip, $theme_json );
-
-		// Add readme.txt.
-		$zip->addFromStringToTheme(
-			'readme.txt',
-			CBT_Theme_Readme::create( $theme )
-		);
-
-		// Build style.css with new theme metadata
-		$css_contents = file_get_contents( get_stylesheet_directory() . '/style.css' );
-		$css_contents = trim( substr( $css_contents, strpos( $css_contents, '*/' ) + 2 ) );
-		$css_contents = CBT_Theme_Styles::build_style_css( $theme ) . $css_contents;
-		$zip->addFromStringToTheme(
-			'style.css',
-			$css_contents
-		);
-
-		// Add / replace screenshot.
-		if ( CBT_Theme_Utils::is_valid_screenshot( $screenshot ) ) {
-			$zip->addFileToTheme(
-				$screenshot['tmp_name'],
-				'screenshot.png'
-			);
-		}
-
-		$zip->close();
-
-		wp_cache_flush();
-
-		header( 'Content-Type: application/zip' );
-		header( 'Content-Disposition: attachment; filename=' . $theme['slug'] . '.zip' );
-		header( 'Content-Length: ' . filesize( $filename ) );
-		flush();
-		echo readfile( $filename );
-	}
-
-	function rest_export_child_cloned_theme( $request ) {
-
-		//TODO: Handle Screenshots
-		$screenshot = null;
-		$theme      = $this->sanitize_theme_data( $request->get_params() );
-
-		// Create ZIP file in the temporary directory.
-		$filename = tempnam( get_temp_dir(), $theme['slug'] );
-		$zip      = CBT_Theme_Zip::create_zip( $filename, $theme['slug'] );
-
-		//TODO: Should the font persistent be optional?
-		// If so then the Font Library fonts will need to be removed from the theme.json settings.
-		$theme_json = CBT_Theme_JSON_Resolver::export_theme_data( 'variation' );
-		$theme_json = CBT_Theme_Zip::add_activated_fonts_to_zip( $zip, $theme_json );
-		$zip        = CBT_Theme_Zip::add_theme_json_to_zip( $zip, $theme_json );
-
-		// Add readme.txt.
-		$zip->addFromStringToTheme(
-			'readme.txt',
-			CBT_Theme_Readme::create( $theme )
-		);
-
-		// Build style.css with new theme metadata
-		$theme['template'] = wp_get_theme()->get( 'TextDomain' );
-		$css_contents      = CBT_Theme_Styles::build_style_css( $theme );
-		$zip->addFromStringToTheme(
-			'style.css',
-			$css_contents
-		);
-
-		// Add / replace screenshot.
-		if ( CBT_Theme_Utils::is_valid_screenshot( $screenshot ) ) {
-			$zip->addFileToTheme(
-				$screenshot['tmp_name'],
-				'screenshot.png'
-			);
-		} else {
-			$source = plugin_dir_path( __DIR__ ) . 'assets/boilerplate/screenshot.png';
-			$zip->addFileToTheme(
-				$source,
-				'screenshot.png'
-			);
-		}
-
-		$zip->close();
-
-		wp_cache_flush();
-
-		header( 'Content-Type: application/zip' );
-		header( 'Content-Disposition: attachment; filename=' . $theme['slug'] . '.zip' );
-		header( 'Content-Length: ' . filesize( $filename ) );
-		flush();
-		echo readfile( $filename );
 	}
 
 	/**
@@ -444,6 +326,7 @@ class CBT_Theme_API {
 		header( 'Content-Length: ' . filesize( $filename ) );
 		flush();
 		echo readfile( $filename );
+		exit;
 	}
 
 	/**
@@ -506,6 +389,7 @@ class CBT_Theme_API {
 				}
 			}
 			CBT_Theme_Templates::clear_user_templates_customizations();
+			CBT_Theme_Templates::clear_user_template_parts_customizations();
 		}
 
 		if ( isset( $options['saveStyle'] ) && true === $options['saveStyle'] ) {
@@ -517,7 +401,15 @@ class CBT_Theme_API {
 			CBT_Theme_Styles::clear_user_styles_customizations();
 		}
 
-		wp_cache_flush();
+		if ( isset( $options['savePatterns'] ) && true === $options['savePatterns'] ) {
+			$response = CBT_Theme_Patterns::add_patterns_to_theme( $options );
+
+			if ( is_wp_error( $response ) ) {
+				return $response;
+			}
+		}
+
+		wp_get_theme()->cache_delete();
 
 		return new WP_REST_Response(
 			array(
@@ -545,6 +437,32 @@ class CBT_Theme_API {
 		);
 	}
 
+	/**
+	 * Reset the theme to the default state.
+	 */
+	function rest_reset_theme( $request ) {
+		$options = $request->get_params();
+
+		if ( isset( $options['resetStyles'] ) && true === $options['resetStyles'] ) {
+			CBT_Theme_Styles::clear_user_styles_customizations();
+		}
+
+		if ( isset( $options['resetTemplates'] ) && true === $options['resetTemplates'] ) {
+			CBT_Theme_Templates::clear_user_templates_customizations();
+		}
+
+		if ( isset( $options['resetTemplateParts'] ) && true === $options['resetTemplateParts'] ) {
+			CBT_Theme_Templates::clear_user_template_parts_customizations();
+		}
+
+		return rest_ensure_response(
+			array(
+				'status'  => 'SUCCESS',
+				'message' => __( 'Theme Reset.', 'create-block-theme' ),
+			)
+		);
+	}
+
 	private function sanitize_theme_data( $theme ) {
 		$sanitized_theme['name']                = sanitize_text_field( $theme['name'] );
 		$sanitized_theme['description']         = sanitize_text_field( $theme['description'] ?? '' );
@@ -555,8 +473,10 @@ class CBT_Theme_API {
 		$sanitized_theme['subfolder']           = sanitize_text_field( $theme['subfolder'] ?? '' );
 		$sanitized_theme['version']             = sanitize_text_field( $theme['version'] ?? '' );
 		$sanitized_theme['screenshot']          = sanitize_text_field( $theme['screenshot'] ?? '' );
+		$sanitized_theme['requires_wp']         = sanitize_text_field( $theme['requires_wp'] ?? '' );
 		$sanitized_theme['recommended_plugins'] = sanitize_textarea_field( $theme['recommended_plugins'] ?? '' );
 		$sanitized_theme['font_credits']        = sanitize_textarea_field( $theme['font_credits'] ?? '' );
+		$sanitized_theme['image_credits']       = sanitize_textarea_field( $theme['image_credits'] ?? '' );
 		$sanitized_theme['template']            = '';
 		$sanitized_theme['slug']                = sanitize_title( $theme['name'] );
 		$sanitized_theme['text_domain']         = $sanitized_theme['slug'];
